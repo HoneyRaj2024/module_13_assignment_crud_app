@@ -13,6 +13,7 @@ class UpdateProductPage extends StatefulWidget {
   @override
   _UpdateProductPageState createState() => _UpdateProductPageState();
 }
+
 class _UpdateProductPageState extends State<UpdateProductPage> {
   final TextEditingController _productNameController = TextEditingController();
   final TextEditingController _productCodeController = TextEditingController();
@@ -30,12 +31,14 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
     _quantityController.addListener(_calculateTotalPrice);
     _fetchProductData();
   }
+
   @override
   void dispose() {
     _unitPriceController.removeListener(_calculateTotalPrice);
     _quantityController.removeListener(_calculateTotalPrice);
     super.dispose();
   }
+
   void _calculateTotalPrice() {
     setState(() {
       final double unitPrice =
@@ -77,129 +80,137 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
       _showErrorDialog('Failed to fetch product data. Please try again.');
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.cyan,
-        title: const Text(
-          'Update Product',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    return Container(
+      color: Colors.grey[200],
+      child: Scaffold(
+        appBar: AppBar(
+          leading: BackButton(
+            color: Colors.white,
+          ),
+          backgroundColor: Colors.cyan,
+          title: const Text(
+            'Update Product',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
         ),
-      ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : Container(
-              color: Colors.grey[200],
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextFormField(
-                          controller: _productNameController,
-                          decoration:
-                              const InputDecoration(labelText: 'Product Name'),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter product name';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 20.0),
-                        TextFormField(
-                          controller: _productCodeController,
-                          decoration:
-                              const InputDecoration(labelText: 'Product Code'),
-                          keyboardType: TextInputType.number,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter product code';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 20.0),
-                        TextFormField(
-                          controller: _unitPriceController,
-                          decoration:
-                              const InputDecoration(labelText: 'Unit Price'),
-                          keyboardType: TextInputType.number,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter unit price';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 20.0),
-                        TextFormField(
-                          controller: _quantityController,
-                          decoration:
-                              const InputDecoration(labelText: 'Quantity'),
-                          keyboardType: TextInputType.number,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter quantity';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 20.0),
-                        TextFormField(
-                          controller: _totalPriceController,
-                          decoration:
-                              const InputDecoration(labelText: 'Total Price'),
-                          keyboardType: TextInputType.number,
-                          enabled: false,
-                        ),
-                        const SizedBox(height: 20.0),
-                        if (_imageFile != null)
+        body: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : Container(
+                color: Colors.grey[200],
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextFormField(
+                            controller: _productNameController,
+                            decoration: const InputDecoration(
+                                labelText: 'Product Name'),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter product name';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 20.0),
+                          TextFormField(
+                            controller: _productCodeController,
+                            decoration: const InputDecoration(
+                                labelText: 'Product Code'),
+                            keyboardType: TextInputType.number,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter product code';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 20.0),
+                          TextFormField(
+                            controller: _unitPriceController,
+                            decoration:
+                                const InputDecoration(labelText: 'Unit Price'),
+                            keyboardType: TextInputType.number,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter unit price';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 20.0),
+                          TextFormField(
+                            controller: _quantityController,
+                            decoration:
+                                const InputDecoration(labelText: 'Quantity'),
+                            keyboardType: TextInputType.number,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter quantity';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 20.0),
+                          TextFormField(
+                            controller: _totalPriceController,
+                            decoration:
+                                const InputDecoration(labelText: 'Total Price'),
+                            keyboardType: TextInputType.number,
+                            enabled: false,
+                          ),
+                          const SizedBox(height: 20.0),
+                          if (_imageFile != null)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20.0),
+                              child: Image.file(
+                                _imageFile!,
+                                height: 150,
+                              ),
+                            ),
                           Padding(
                             padding: const EdgeInsets.only(top: 20.0),
-                            child: Image.file(
-                              _imageFile!,
-                              height: 150,
+                            child: _imageUrl != null
+                                ? Image.network(
+                                    'https://crudapp.alsaaditsolution.com/rest-api/api/img/$_imageUrl',
+                                    height: 150,
+                                  )
+                                : Container(), // Placeholder or alternative widget if _imageUrl is null
+                          ),
+                          const SizedBox(height: 20.0),
+                          Center(
+                            child: ElevatedButton(
+                              onPressed: _pickImage,
+                              child: const Text('Pick Image'),
                             ),
                           ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: _imageUrl != null
-                              ? Image.network(
-                                  'https://crudapp.alsaaditsolution.com/rest-api/api/img/$_imageUrl',
-                                  height: 150,
-                                )
-                              : Container(), // Placeholder or alternative widget if _imageUrl is null
-                        ),
-                        const SizedBox(height: 20.0),
-                        Center(
-                          child: ElevatedButton(
-                            onPressed: _pickImage,
-                            child: const Text('Pick Image'),
+                          const SizedBox(height: 20.0),
+                          Center(
+                            child: ElevatedButton(
+                              onPressed: _updateProduct,
+                              child: const Text('Update Product'),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 20.0),
-                        Center(
-                          child: ElevatedButton(
-                            onPressed: _updateProduct,
-                            child: const Text('Update Product'),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
+      ),
     );
   }
   Future<void> _pickImage() async {
     try {
-      final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+      final pickedFile =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
         setState(() {
           _imageFile = File(pickedFile.path);
@@ -212,6 +223,9 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
   }
   Future<void> _updateProduct() async {
     if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true; // Set loading state to true
+      });
       try {
         final url = Uri.parse(
             'https://crudapp.alsaaditsolution.com/rest-api/api/update.php');
@@ -244,9 +258,14 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
       } catch (e) {
         print("Error updating product: $e");
         _showErrorDialog('Failed to update product. Please try again.');
+      } finally {
+        setState(() {
+          _isLoading = false; // Set loading state back to false
+        });
       }
     }
   }
+
   void _showErrorDialog(String message) {
     showDialog(
       context: context,

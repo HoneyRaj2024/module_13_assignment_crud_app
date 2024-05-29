@@ -102,8 +102,7 @@ class _CreateProductPageState extends State<CreateProductPage> {
       }
     }
   }
-
-  void _showErrorDialog(String message) {
+   void _showErrorDialog(String message) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -114,7 +113,6 @@ class _CreateProductPageState extends State<CreateProductPage> {
       },
     );
   }
-
   void _showSuccessDialog() {
     showDialog(
       context: context,
@@ -130,8 +128,7 @@ class _CreateProductPageState extends State<CreateProductPage> {
       Navigator.of(context).pop();
     });
   }
-
-  void _resetForm() {
+ void _resetForm() {
     _productNameController.clear();
     _productCodeController.clear();
     _unitPriceController.clear();
@@ -141,11 +138,11 @@ class _CreateProductPageState extends State<CreateProductPage> {
       _imageFile = null;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(color: Colors.white,),
         backgroundColor: Colors.cyan,
         title: const Text(
           'Add Product',

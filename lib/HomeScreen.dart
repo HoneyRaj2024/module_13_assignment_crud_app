@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
-import 'addproduct.dart';
+import 'addProduct.dart';
 import 'updateProduct.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
