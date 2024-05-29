@@ -10,11 +10,9 @@ class UpdateProductPage extends StatefulWidget {
 
   const UpdateProductPage({Key? key, required this.productId})
       : super(key: key);
-
   @override
   _UpdateProductPageState createState() => _UpdateProductPageState();
 }
-
 class _UpdateProductPageState extends State<UpdateProductPage> {
   final TextEditingController _productNameController = TextEditingController();
   final TextEditingController _productCodeController = TextEditingController();
@@ -25,7 +23,6 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = true;
   String? _imageUrl;
-
   @override
   void initState() {
     super.initState();
@@ -33,14 +30,12 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
     _quantityController.addListener(_calculateTotalPrice);
     _fetchProductData();
   }
-
   @override
   void dispose() {
     _unitPriceController.removeListener(_calculateTotalPrice);
     _quantityController.removeListener(_calculateTotalPrice);
     super.dispose();
   }
-
   void _calculateTotalPrice() {
     setState(() {
       final double unitPrice =
@@ -82,7 +77,6 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
       _showErrorDialog('Failed to fetch product data. Please try again.');
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -203,21 +197,19 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
             ),
     );
   }
-
   Future<void> _pickImage() async {
     try {
-      final pickedFile =
-          await ImagePicker().pickImage(source: ImageSource.gallery);
+      final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
         setState(() {
           _imageFile = File(pickedFile.path);
+          _imageUrl = null; // Reset _imageUrl as we have a new image
         });
       }
     } catch (e) {
       print("Error picking image: $e");
     }
   }
-
   Future<void> _updateProduct() async {
     if (_formKey.currentState!.validate()) {
       try {
@@ -255,7 +247,6 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
       }
     }
   }
-
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
@@ -275,7 +266,6 @@ class _UpdateProductPageState extends State<UpdateProductPage> {
       },
     );
   }
-
   void _showSuccessDialog() {
     showDialog(
       context: context,
