@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         products = json.decode(response.body);
       });
     } else {
-      throw Exception('Failed to load products');
+      throw Exception('Failed to load products data');
     }
   }
 
