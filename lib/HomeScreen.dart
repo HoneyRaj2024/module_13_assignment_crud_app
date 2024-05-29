@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: products.isEmpty
             ? Center(
                 child: Lottie.asset(
-                  'assets/loading.json', // Replace with your Lottie animation file path
+                  'assets/animation.json', // Replace with your Lottie animation file path
                   width: 200,
                   height: 200,
                   fit: BoxFit.cover,

@@ -8,6 +8,6 @@ class AssetsRes {
 
   static const String PLUGIN_NAME = 'module_13_assignment_crud_app';
   static const String PLUGIN_VERSION = '1.0.0+1';
-  static const String LOADING = 'assets/loading.json';
+  static const String ANIMATION = 'assets/animation.json';
   static const String LOGO = 'assets/logo.png';
 }
